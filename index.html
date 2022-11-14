@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Monster Slayer</h1>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <div
+            class="healthbar__value"
+            v-bind:style="monsterHealthBar"
+          ></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <div
+            class="healthbar__value"
+            v-bind:style="playerHealthBar"
+          ></div>
+        </div>
+      </section>
+      <section id="controls">
+        <button v-on:click="restartGame" v-if="win || gameOver">Restart</button>
+      </section>
+      <section id="result" class="container" v-if="win || gameOver || draw">
+        <p v-show="win">You Win !</p>
+        <p v-show="playerHealth === 0 || gameOver == true">Game-Over</p>
+        <p v-show="draw">It's a Draw</p>
+      </section>
+      <section id="controls">
+        <button v-on:click="playerAttack" :disabled="gameOver || win ? true : false">ATTACK</button>
+        <button v-on:click="playerSpecialAttack" :disabled="gameOver || win ? true : false">SPECIAL ATTACK</button>
+        <button v-on:click="playerHeal" :disabled="gameOver || win ? true : false">HEAL</button>
+        <button v-on:click="playerSurrender" :disabled="gameOver || win ? true : false">SURRENDER</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <li v-for="log in battleLog"> 
+            <strong :style="{color: log.actionBy === 'player' ? 'green' : 'red'}">{{ log.actionBy }}</strong>&nbsp;
+            <span v-if="log.actionType === 'heal'">heals himself for {{ log.actionValue}}</span>
+            <span v-else>attack and deals with <strong :style="{color: log.actionBy === 'player' ? 'blue' : 'red'}">{{ log.actionValue}}</strong></span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
