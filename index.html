@@ -22,7 +22,7 @@
         <div class="healthbar">
           <div
             class="healthbar__value"
-            v-bind:style="monsterHealthBar"
+            :style="monsterHealthBar"
           ></div>
         </div>
       </section>
@@ -31,12 +31,12 @@
         <div class="healthbar">
           <div
             class="healthbar__value"
-            v-bind:style="playerHealthBar"
+            :style="playerHealthBar"
           ></div>
         </div>
       </section>
       <section id="controls">
-        <button v-on:click="restartGame" v-if="win || gameOver">Restart</button>
+        <button @click="restartGame" v-if="win || gameOver">Restart</button>
       </section>
       <section id="result" class="container" v-if="win || gameOver || draw">
         <p v-show="win">You Win !</p>
@@ -44,10 +44,10 @@
         <p v-show="draw">It's a Draw</p>
       </section>
       <section id="controls">
-        <button v-on:click="playerAttack" :disabled="gameOver || win ? true : false">ATTACK</button>
-        <button v-on:click="playerSpecialAttack" :disabled="gameOver || win ? true : false">SPECIAL ATTACK</button>
-        <button v-on:click="playerHeal" :disabled="gameOver || win ? true : false">HEAL</button>
-        <button v-on:click="playerSurrender" :disabled="gameOver || win ? true : false">SURRENDER</button>
+        <button @click="playerAttack" :disabled="gameOver || win ? true : false">ATTACK</button>
+        <button @click="playerSpecialAttack" :disabled="gameOver || win ? true : false">SPECIAL ATTACK</button>
+        <button @click="playerHeal" :disabled="gameOver || win ? true : false">HEAL</button>
+        <button @click="playerSurrender" :disabled="gameOver || win ? true : false">SURRENDER</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
